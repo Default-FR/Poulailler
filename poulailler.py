@@ -115,7 +115,6 @@ while True:
 
 #################################################################
 # Auteur: Pierre Bouillon
-# Contact/Remarques/Problemes: pierre.bouillon@openmailbox.org
 #
 # Date de creation: 01/10/2016
 #################################################################
