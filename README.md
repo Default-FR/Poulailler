@@ -10,8 +10,8 @@
 
 ## Lancement
 
-cd <chemin vers le répertoire de poulailler.py>
-python poulailler.py
+* cd <chemin vers le répertoire de *poulailler.py*> 
+* python poulailler.py
 
 -------------------------------------
 Auteur: Pierre Bouillon
