@@ -14,7 +14,7 @@
 
 # ***********************************************************************
 # Chicken House
-** Open/close handler for a chickenhouse regarding current sunset **
+**Open/close handler for a chickenhouse regarding current sunset**
 
 ## pip install
 * sudo apt install python-pip
