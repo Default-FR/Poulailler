@@ -12,7 +12,7 @@
 * cd <chemin vers le répertoire de *poulailler.py*> 
 * python poulailler.py
 
-# ***********************************************************************
+# ***************************************************************
 # Chicken House
 **Open/close handler for a chickenhouse regarding current sunset**
 
