@@ -2,30 +2,34 @@
 **Programme de gestion de l'ouverture et fermeture d'un poulailler avec pyephem selon le coucher de soleil**
 
 ## Installation de pip
-* sudo apt install python-pip
-* pip install --upgrade pip
+`sudo apt install python-pip`
+
+`pip install --upgrade pip`
 
 ## Installation de [pyephem](http://rhodesmill.org/pyephem/)
-* pip install pyephem
+`pip install pyephem`
 
 ## Lancement
-* cd <chemin vers le répertoire de *poulailler.py*> 
-* python poulailler.py
+`cd` (cheminVersChickenHouse)
 
-# ***************************************************************
+`python main.py`
+
+# ********************************************************
 # Chicken House
 **Open/close handler for a chickenhouse regarding current sunset**
 
 ## pip install
-* sudo apt install python-pip
-* pip install --upgrade pip
+`sudo apt install python-pip`
+
+`pip install --upgrade pip`
 
 ## [pyephem](http://rhodesmill.org/pyephem/) install
-* pip install pyephem
+`pip install pyephem`
 
 ## Launch
-* cd <chemin vers le répertoire de *poulailler.py*> 
-* python poulailler.py
+`cd` (pathToChickenHouse)
+
+`python main.py`
 
 -------------------------------------
 Auteur: Pierre Bouillon
