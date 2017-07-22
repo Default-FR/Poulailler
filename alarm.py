@@ -1,19 +1,39 @@
-# -*- coding: utf-8 -*-
+    # -*- coding: utf-8 -*-
 # author: pBouillon - https://github.com/pBouillon
 
 import ephem
 from ephem      import Observer
 from ephem      import Sun
+import RPi.GPIO
+from RPi.GPIO   import BCM
+from RPi.GPIO   import OUT
+from RPi.GPIO   import cleanup
+from RPi.GPIO   import output
+from RPi.GPIO   import setmode
+from RPi.GPIO   import setup
 import time
 from time       import localtime
 from time       import sleep
 
-'''Constant: integer equals to 59 seconds'''
+'''Constant: 
+integer equals to 59 seconds'''
 LATENCY = 59
-'''Constant: morning hours to open the doors'''
-H_MORNING = 9
-'''Constant: morning minutes to open the doors'''
-M_MORNING = 00
+
+'''Constant: 
+integer equals to an additionnal delay before evening alarm'''
+ADD_DELAY = 3
+
+'''Constant:
+ morning hours to open the doors'''
+H_MORNING = 7
+
+'''Constant:
+ morning minutes to open the doors'''
+M_MORNING = 30
+
+'''Constant:
+Pin number for the signal'''
+PIN_SIG = 18
 
 class Alarm:
     '''Reference Alarm
@@ -30,6 +50,10 @@ class Alarm:
         _current_alarm : next time at which the clock will ring
     '''
     def __init__ (self):
+        setmode(BCM)
+        setup(PIN_SIG, OUT)
+        output(PIN_SIG, False)
+        
         self._observer      = self.__build_obs ()
         self._current_time  = self._get_current_time ()
         self._morning_alarm = [H_MORNING,M_MORNING]
@@ -74,7 +98,7 @@ class Alarm:
             The current time as a list of 4 slots
         '''
         current_time = [0,0,0,0]
-        for x in xrange(4):
+        for x in range(4):
             current_time[x] = localtime()[(x+1)]
         return current_time
 
@@ -113,6 +137,8 @@ class Alarm:
                                             use_center=True))
             self._current_alarm[0] = sunst[len(sunst)-8:len(sunst)-6]
             self._current_alarm[1] = sunst[len(sunst)-5:len(sunst)-3]
+            self._current_alarm[0] = int(self._current_alarm[0]) \
+            + ADD_DELAY
 
         # Set morning alarm
         else:
@@ -137,7 +163,9 @@ class Alarm:
         Do all actions
         Then set up its next alarm
         '''
+        output(PIN_SIG, True)
         sleep(1)
+        output(PIN_SIG, False)
         self._next_alarm()
 
     def run (self):
@@ -147,5 +175,10 @@ class Alarm:
         Wait each iteration LATENCY seconds
         '''
         while True:
-            self.check_alarm()
-            sleep(LATENCY)
+            try:
+                self.check_alarm()
+                print(self)
+                sleep(LATENCY)
+            except (KeyboardInterrupt, SystemExit):
+                cleanup()
+                exit("Program was ended")
