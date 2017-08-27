@@ -1,7 +1,7 @@
 # CONSTANTS
 '''Constant:
-integer equals to 59 seconds'''
-ALARM_TIME = 59
+alarm trigger duration'''
+ALARM_TIME = 1
 
 '''Constant:
 integer equals to 59 seconds'''
