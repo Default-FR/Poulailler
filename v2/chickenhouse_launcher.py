@@ -3,10 +3,15 @@
 # -*- coding: utf-8 -*-
 # author: pBouillon - https://pierrebouillon.tech/
 
+import chickenHouse_controller
+from chickenHouse_controller import ChickenHouse_controller
 import os
 from os      import fork
 from os      import setsid
 from os      import umask
+import sys
+from sys     import stderr
+
 
 def daemonize ():
     """Daemonize the script
@@ -27,7 +32,7 @@ def daemonize ():
     elif pid!=0:
         exit ()
 
-    sys.stderr = open ('./logs.txt', 'w+')
+    stderr = open ('./logs.txt', 'w+')
 
 if __name__ == '__main__':
     daemonize ()

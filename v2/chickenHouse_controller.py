@@ -29,6 +29,7 @@ import sys
 from sys        import exit
 from sys        import version_info as version
 import time
+from time       import localtime
 from time       import sleep
 
 
@@ -83,7 +84,7 @@ class ChickenHouse_controller :
 
     def __ring (self):
         output (PIN_SIG, HIGH)
-        sleep (ALARM_TIME)
+        sleep  (ALARM_TIME)
         output (PIN_SIG, LOW)
 
     def __setup_next_alarm (self):
@@ -92,7 +93,7 @@ class ChickenHouse_controller :
         if dt.now().hour > ALARM_MORNING_H :
             self._observer.date = self.__get_current_date ()
             # sunset = YYYY:MM/DD HH:MM:SS
-            sunset = observer.next_setting (ephem.Sun (), use_center = True)
+            sunset = self._observer.next_setting (Sun (), use_center = True)
             sunset = sunset.split(' ')[1]
             self._alarm_hour   = sunset.split(':')[0]
             self._alarm_minute = sunset.split(':')[1]
