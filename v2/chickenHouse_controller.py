@@ -104,8 +104,8 @@ class ChickenHouse_controller :
     def __update (self):
         '''Check if the alarm should ring
         '''
-        if self._alarm_hour == dt.now().hour \
-            and self._alarm_minute == dt.now().minute :
+        if int(self._alarm_hour) == dt.now().hour \
+            and int(self._alarm_minute)+1 == dt.now().minute :
             self.__ring ()
             self.__setup_next_alarm ()
 
@@ -115,7 +115,7 @@ class ChickenHouse_controller :
         while True:
             try:
                 self.__update()
-                # in need of tests
+                # in tests needed
                 # print('now: '+str(dt.now())+' --- alarm: '+str(self._alarm_hour)+':'+str(self._alarm_minute))
                 sleep (LATENCY)
             except (KeyboardInterrupt, SystemExit):
