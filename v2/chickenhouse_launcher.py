@@ -36,5 +36,6 @@ def daemonize ():
 
 if __name__ == '__main__':
     daemonize ()
+    print ('now running as a background task')
     controller = ChickenHouse_controller ()
     controller.poll ()

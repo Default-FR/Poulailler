@@ -49,9 +49,9 @@ class ChickenHouse_controller :
     def __init__ (self) :
         self._alarm_hour   = 0
         self._alarm_minute = 0
-        self.__setup_next_alarm ()
         self._observer = self.__build_obs ()
         self.__init_rasp_config ()
+        self.__setup_next_alarm ()
 
     def __build_obs (self) :
         '''Set up the Observer
@@ -60,10 +60,10 @@ class ChickenHouse_controller :
             The observer built
         '''
         local_observer = Observer ()
-        local_observer.pressure  = 0
-        local_observer.horizon   = HORIZON
-        local_observer.latitude  = LATITUDE
-        local_observer.longitude = LONGITUDE
+        local_observer.pressure = 0
+        local_observer.horizon  = HORIZON
+        local_observer.lat = LATITUDE
+        local_observer.lon = LONGITUDE
         return local_observer
 
     def __init_rasp_config (self) :
@@ -94,7 +94,7 @@ class ChickenHouse_controller :
             self._observer.date = self.__get_current_date ()
             # sunset = YYYY:MM/DD HH:MM:SS
             sunset = self._observer.next_setting (Sun (), use_center = True)
-            sunset = sunset.split(' ')[1]
+            sunset = str(sunset).split(' ')[1]
             self._alarm_hour   = sunset.split(':')[0]
             self._alarm_minute = sunset.split(':')[1]
         else:
@@ -105,7 +105,7 @@ class ChickenHouse_controller :
         '''Check if the alarm should ring
         '''
         if self._alarm_hour == dt.now().hour \
-            and self._alarm.minute == dt.now().minute :
+            and self._alarm_minute == dt.now().minute :
             self.__ring ()
             self.__setup_next_alarm ()
 
@@ -115,6 +115,8 @@ class ChickenHouse_controller :
         while True:
             try:
                 self.__update()
+                # in need of tests
+                # print('now: '+str(dt.now())+' --- alarm: '+str(self._alarm_hour)+':'+str(self._alarm_minute))
                 sleep (LATENCY)
             except (KeyboardInterrupt, SystemExit):
                 cleanup ()
