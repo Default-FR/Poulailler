@@ -15,11 +15,11 @@ import time
 from time       import localtime
 from time       import sleep
 
-'''Constant: 
+'''Constant:
 integer equals to 59 seconds'''
 LATENCY = 59
 
-'''Constant: 
+'''Constant:
 integer equals to an additionnal delay before evening alarm'''
 ADD_DELAY = 3
 
@@ -53,7 +53,7 @@ class Alarm:
         setmode(BCM)
         setup(PIN_SIG, OUT)
         output(PIN_SIG, False)
-        
+
         self._observer      = self.__build_obs ()
         self._current_time  = self._get_current_time ()
         self._morning_alarm = [H_MORNING,M_MORNING]
