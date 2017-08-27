@@ -69,7 +69,7 @@ class ChickenHouse_controller :
     def __init_rasp_config (self) :
         setmode (BCM)
         setup   (PIN_SIG, OUT)
-        output  (PIN_SIG, False)
+        output  (PIN_SIG, LOW)
 
     def __get_current_date (self):
         '''catch and build the current date
