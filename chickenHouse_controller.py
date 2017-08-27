@@ -105,7 +105,7 @@ class ChickenHouse_controller :
         '''Check if the alarm should ring
         '''
         if int(self._alarm_hour) == dt.now().hour \
-            and int(self._alarm_minute)+1 == dt.now().minute :
+            and int(self._alarm_minute) == dt.now().minute :
             self.__ring ()
             self.__setup_next_alarm ()
 
